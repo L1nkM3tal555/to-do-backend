@@ -2,7 +2,7 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 
 @Injectable()
-export class AppService implements OnModuleInit{
+export class DatabaseService implements OnModuleInit {
   constructor(private dataSource: DataSource) {}
 
   async onModuleInit() {
@@ -10,7 +10,6 @@ export class AppService implements OnModuleInit{
     await queryRunner.connect();
 
     try {
-      console.log("TRYIIIING")
       // Crear la base de datos 'todotasks' si no existe
       await queryRunner.query(`CREATE DATABASE "todotasks"`);
 
@@ -32,10 +31,5 @@ export class AppService implements OnModuleInit{
     } finally {
       await queryRunner.release();
     }
-  }
-
-  getHello(): string {
-    
-    return 'Hello World!';
   }
 }
